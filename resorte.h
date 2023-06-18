@@ -19,5 +19,4 @@ lista_insertar_ultimo(resorte_i, m2); //Inserta en la ultima posicion de la list
 lista_insertar_ultimo(resorte_i, &n) //Se inserta en la ultima posicion del resorte su longitud.
 //Si la longitud es mayor a LO_MAX no se estira mas el resorte.
 
-lista_destruir(resorte_i, free); //Destruye el resorte 
-//hola
+lista_destruir(resorte_i, free); //Destruye el resorte

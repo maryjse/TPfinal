@@ -12,4 +12,4 @@ lista_t **resortes; // Resortes que estan dentro de la malla, linkeados a las ma
 //a la masa en el momento de su creacion.
 }
 
-//malla
+//hola//hola
