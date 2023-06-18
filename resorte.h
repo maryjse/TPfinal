@@ -1,22 +1,36 @@
+#ifndef RESORTE_H
+#define RESORTE_H
+
+#include<stdlib.h>
+#include<lista.h>
+#include<stdbool.h>
+
 //TDA resorte:
 
-//debo usar la lista que se da en clase
+typedef struct resorte{
+size_t longitud; //Longitud del resorte
+int pos_inicial[2]; // Posiciones donde se inicie la creacion del resorte. pos_inicial[0] = xi
+//pos_inicial[1] = yi
+int pos_final[2];//Posiciones donde se finalice el resorte
+}resorte_t;
+
+
+resorte_t *resorte_crear(int x_inicial, int y_inicial); //Funcion que crea un nuevo resorte
+//Pre: recibe las posiciones donde se creo una masa previamente
+//Post: devuelve un resorte nuevo o NULL en caso de falla
+
+void resorte_destruir(resorte_t *resorte);//Destruye el resorte previamente creado
+
+bool resorte_agregar_final(resorte_t *resorte); //Recibe un resorte y le agrega la posicion donde termina de construirse
+//Pre: el resorte fue creado
+//Post: Se termina de construir el resorte o se destruye, dependiendo de si se pasa la longitud maxima o no
+
+bool hay_resorte(int pos_x, int pos_y); //Comprueba si hay un resorte en esa posicion.
+//No se como hacer esta funcion, pero se me ocurre que si las posiciones estan entre una recta trazada entre
+//pos_inicial y pos_final de algun resorte de la lista sea true;
+
+//debo usar la lista que se da en clase para guardar los resortes
 //cuando el usuario clickee sobre una masa creada se inicia la creacion de un resorte
-lista_t* resorte_i = lista_crear() //Se crea un resorte que por ahora no esta asociado a ninguna masa
 
-//luego de crear el resorte, se le debe insertar el dato del nodo (masa) al que se este uniendo.
-lista_insertar_primero(resorte_i, masa_t *masa);
 
-//si resorte es mayor a LO_MAX se llama a 
-lista_destruir(resorte_i);
-
-//si se clickea sobre una una posicion sin masa se debe crear una masa y ademas agregarlo a la lista resorte:
-m2 = *masa_crear();
-
-lista_insertar_ultimo(resorte_i, m2); //Inserta en la ultima posicion de la lista la masa creada
-
-//Con las posiciones de las masas previamente obtenidas con obtener_posicion hago la norma int n =||p2 -p1|| 
-lista_insertar_ultimo(resorte_i, &n) //Se inserta en la ultima posicion del resorte su longitud.
-//Si la longitud es mayor a LO_MAX no se estira mas el resorte.
-
-lista_destruir(resorte_i, free); //Destruye el resorte
+#endif
