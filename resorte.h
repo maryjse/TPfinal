@@ -2,7 +2,7 @@
 
 //debo usar la lista que se da en clase
 //cuando el usuario clickee sobre una masa creada se inicia la creacion de un resorte
- lista_t* resorte_i = lista_crear() //Se crea un resorte que por ahora no esta asociado a ninguna masa
+lista_t* resorte_i = lista_crear() //Se crea un resorte que por ahora no esta asociado a ninguna masa
 
 //luego de crear el resorte, se le debe insertar el dato del nodo (masa) al que se este uniendo.
 lista_insertar_primero(resorte_i, masa_t *masa);

@@ -63,7 +63,7 @@ int main(int argc, char *argv[]) {
                 iniciox = event.motion.x;
                 inicioy = event.motion.y;
                 /*
-                if(!hay_masa(iniciox,inicioy)){
+                if(!hay_masa(iniciox, inicioy)){
                     masa_t *m1 = crear_masa();
                 }
                 

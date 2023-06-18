@@ -3,8 +3,6 @@
 typedef struct masa{
     int xi, yi; //Posicion en la que se crea la masa
     float masa; //Valor de la masa, sera igual para todas las masas creadas
-    lista_t **resortes; //Arreglo de punteros a resortes a los cuales este conectado la masa
-    //Este arreglo se modifica segun lo que pase en la malla
 } masa_t;
 
 masa_t *masa_crear();//Crea la masa, Pos: devuelve NULL si no se pudo crear o un puntero a la masa creada
