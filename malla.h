@@ -1,4 +1,5 @@
-//TDA MALLA:
+//TDA malla:
+//La malla debe relacionar las masas con los resortes.
 
 typedef struct malla{
     masa_t **masas; //Puntero que apunta a la direccion de memoria apuntada por cada una de las masas almacenadas;
@@ -7,8 +8,6 @@ typedef struct malla{
     masas = malloc(2*sizeof(masa_t*));
     *masas[i] = malloc(sizeof(masa_t)); 0 <= i < 2; //(para el inicio)
 
-    lista_t **resortes // Resortes que estan dentro de la malla, linkeados a las masas a traves de los punteros
-    //a la masa en el momento de su creacion.
-
-
+lista_t **resortes // Resortes que estan dentro de la malla, linkeados a las masas a traves de los punteros
+//a la masa en el momento de su creacion.
 }
