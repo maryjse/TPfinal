@@ -20,3 +20,4 @@ lista_insertar_ultimo(resorte_i, &n) //Se inserta en la ultima posicion del reso
 //Si la longitud es mayor a LO_MAX no se estira mas el resorte.
 
 lista_destruir(resorte_i, free); //Destruye el resorte 
+//hola
