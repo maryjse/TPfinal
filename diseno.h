@@ -60,5 +60,3 @@ typedef struct malla{
 
 
 }
-
-*/
