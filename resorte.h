@@ -21,7 +21,7 @@ resorte_t *resorte_crear(int x_inicial, int y_inicial); //Funcion que crea un nu
 
 void resorte_destruir(resorte_t *resorte);//Destruye el resorte previamente creado
 
-bool resorte_agregar_final(resorte_t *resorte); //Recibe un resorte y le agrega la posicion donde termina de construirse
+bool resorte_agregar_final(resorte_t *resorte, int x_final, int y_final); //Recibe un resorte y le agrega la posicion donde termina de construirse
 //Pre: el resorte fue creado
 //Post: Se termina de construir el resorte o se destruye, dependiendo de si se pasa la longitud maxima o no
 
