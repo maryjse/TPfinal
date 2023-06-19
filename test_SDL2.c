@@ -111,6 +111,16 @@ int main(int argc, char *argv[]) {
         escribir_texto(renderer, font, aux, VENTANA_ANCHO - 100, VENTANA_ALTO - 34);
 #endif
 
+float ancho1 = 10;
+
+//Dibujo de las masas fijas:
+SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+SDL_Rect masa_fija_1 = {100 - ancho1/2, 350 - ancho1/2, ancho1, ancho1};
+SDL_Rect masa_fija_2 = {280 - ancho1/2, 350 - ancho1/2, ancho1, ancho1};
+SDL_RenderDrawRect(renderer, &masa_fija_1);
+SDL_RenderDrawRect(renderer, &masa_fija_2);
+
+
         if(estoy_dibujando) {
             SDL_SetRenderDrawColor(renderer, 0xFF, 0x00, 0x00, 0x00);
             SDL_RenderDrawLine(renderer, iniciox, inicioy, coordx, coordy);
