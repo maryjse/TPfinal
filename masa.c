@@ -5,12 +5,20 @@ masa_t *masa_crear(size_t xi, size_t yi) {
     if(m == NULL)
         return NULL;
     
-    m->x_inicial = xi;
-    m->y_inicial = yi;
+    m->x = xi;
+    m->y = yi;
 
     return m;
 }
 
 void masa_destruir(masa_t *m) {
     free(m);
+}
+
+void obtener_posicion(const masa_t *m, size_t *pos_x, size_t *pos_y){
+    *pos_x = m -> x;
+    *pos_y = m -> y;
+}
+
+bool hay_masa(size_t x, size_t y){ //Esta funcion creo que es mejor desarrollarla en la malla con la lista de masas
 }
