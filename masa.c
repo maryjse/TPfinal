@@ -23,7 +23,12 @@ void obtener_posicion(const masa_t *m, size_t *pos_x, size_t *pos_y){
 bool hay_masa(size_t x, size_t y){ //Esta funcion creo que es mejor desarrollarla en la malla con la lista de masas
 }
 
-void cambiar_posicion_masa(masa_t *masa, size_t nueva_x, size_t nueva_y){
+bool cambiar_posicion_masa(masa_t *masa, size_t nueva_x, size_t nueva_y){
+    if(hay_masa(nueva_x, nueva_y)){
+        return false
+    }
+
     masa -> xi = nueva_x;
     masa -> yi = nueva_y;
+    return true;
 }
