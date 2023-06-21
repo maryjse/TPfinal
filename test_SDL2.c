@@ -54,8 +54,17 @@ int main(int argc, char *argv[]) {
     bool estoy_dibujando = false;
     int coordx = 0, coordy = 0;
     int iniciox, inicioy;
-     int iniciox, inicioy;
-     masa_t *m1;
+    size_t i = 0;
+
+    typedef struct masas{
+        masa_t *masa[2];
+        size_t masas_totales;
+    }masas_t;
+
+    masas_t *m = malloc(sizeof(masas_t));
+    m -> masa[0] = masa_crear(0,0);
+    m ->masa[1] = masa_crear(0,0);
+    
     // END código del alumno
 
     unsigned int ticks = SDL_GetTicks();
@@ -69,8 +78,11 @@ int main(int argc, char *argv[]) {
                 estoy_dibujando = true;
                 iniciox = event.motion.x;
                 inicioy = event.motion.y;
-                
-                m1 = masa_crear(iniciox, inicioy);
+                if(i<2){
+                    //m -> masa[i] = masa_crear(iniciox,inicioy);
+                    cambiar_posicion_masa(m -> masa[i], iniciox, inicioy);
+                    i++;
+                }
                
                 /*
                 if(!hay_masa(iniciox, inicioy)){
@@ -153,14 +165,18 @@ SDL_RenderDrawRect(renderer, &masa_fija_2);
         }
 
         size_t pos1x, pos1y;
+        size_t pos2x, pos2y;
 
-        obtener_posicion(m1,&pos1x,&pos1y);
+        //masa_t *m1 = masa_crear(iniciox, inicioy);
 
-         SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+        obtener_posicion(m -> masa[0], &pos1x, &pos1y);
+        obtener_posicion(m -> masa[1], &pos2x, &pos2y);
+
+        SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_Rect masa_1 = {pos1x - ANCHO/2, pos1y - ANCHO/2, ANCHO, ANCHO};
         SDL_RenderDrawRect(renderer, &masa_1);
 
-        SDL_Rect masa_2 = {iniciox - ANCHO/2, inicioy - ANCHO/2, ANCHO, ANCHO};
+        SDL_Rect masa_2 = {pos2x - ANCHO/2, pos2y - ANCHO/2, ANCHO, ANCHO};
         SDL_RenderDrawRect(renderer, &masa_2);
 
 
