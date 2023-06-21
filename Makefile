@@ -3,7 +3,7 @@ CC = gcc
 CFLAGS = -c
 
 $(PROGRAM): masa.o test_SDL2.o 
-	$(CC) masa.o test_SDL2.o config.o -o $(PROGRAM)
+	$(CC) masa.o test_SDL2.o -o $(PROGRAM)
 
 masa.o: masa.c masa.h
 	$(CC) $(CFLAGS) masa.c
