@@ -42,10 +42,14 @@ void escribir_texto(SDL_Renderer *renderer, TTF_Font *font, const char *s, int x
             m->masa[i] = masa_crear(xi, yi);
         
         masa_t *aux = realloc(m->masa, (m->masas_totales) * sizeof(masa_t));
+            if(aux == NULL)
+                return false;
+        
         m->masa = aux;
         m->masas_totales++;
         return true;
     }
+
     // masas_t *m = malloc(sizeof(masas_t));
     // m -> masa[0] = masa_crear(0,0);
     // m ->masa[1] = masa_crear(0,0);
