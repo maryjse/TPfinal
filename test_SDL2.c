@@ -29,6 +29,27 @@ void escribir_texto(SDL_Renderer *renderer, TTF_Font *font, const char *s, int x
 }
 #endif
 
+//PRUEBA:
+    typedef struct masas{
+        masa_t *masa;
+        size_t masas_totales = 0;
+    } masas_t;
+
+    masas_t *m = malloc(sizeof(masas_t));
+
+    bool agregar_masa(masas_t *m, int xi, int yi) {
+        for(size_t i = 0; i < m->masas_totales; i++)
+            m->masa[i] = masa_crear(xi, yi);
+        
+        masa_t *aux = realloc(m->masa, (m->masas_totales) * sizeof(masa_t));
+        m->masa = aux;
+        m->masas_totales++;
+        return true;
+    }
+    // masas_t *m = malloc(sizeof(masas_t));
+    // m -> masa[0] = masa_crear(0,0);
+    // m ->masa[1] = masa_crear(0,0);
+
 int main(int argc, char *argv[]) {
     SDL_Init(SDL_INIT_VIDEO);
 
@@ -54,16 +75,6 @@ int main(int argc, char *argv[]) {
     bool estoy_dibujando = false;
     int coordx = 0, coordy = 0;
     int iniciox, inicioy;
-    size_t i = 0;
-
-    typedef struct masas{
-        masa_t *masa[2];
-        size_t masas_totales;
-    }masas_t;
-
-    masas_t *m = malloc(sizeof(masas_t));
-    m -> masa[0] = masa_crear(0,0);
-    m ->masa[1] = masa_crear(0,0);
     
     // END código del alumno
 
@@ -78,10 +89,11 @@ int main(int argc, char *argv[]) {
                 estoy_dibujando = true;
                 iniciox = event.motion.x;
                 inicioy = event.motion.y;
-                if(i<2){
-                    //m -> masa[i] = masa_crear(iniciox,inicioy);
+
+                //PRUEBA:
+
+                if(agregar_masa(m, iniciox, inicioy)) {
                     cambiar_posicion_masa(m -> masa[i], iniciox, inicioy);
-                    i++;
                 }
                
                 /*
@@ -164,13 +176,19 @@ SDL_RenderDrawRect(renderer, &masa_fija_2);
 
         }
 
+        //PRUEBA:
+
         size_t pos1x, pos1y;
-        size_t pos2x, pos2y;
+        size_t pos2x, pos2y; //HABRIA QUE HACER UN VECTOR QUE GUARDE LAS POSICIONES
 
         //masa_t *m1 = masa_crear(iniciox, inicioy);
 
-        obtener_posicion(m -> masa[0], &pos1x, &pos1y);
-        obtener_posicion(m -> masa[1], &pos2x, &pos2y);
+        // for(size_t i = 0; i < m->masas_totales; i++) {
+        //     obtener_posicion(m->masa[i], pos2x, pos2y);
+        // }
+
+        obtener_posicion(m->masa[0], pos1x, pos1y);
+        obtener_posicion(m->masa[1], pos2x, pos2y);
 
         SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_Rect masa_1 = {pos1x - ANCHO/2, pos1y - ANCHO/2, ANCHO, ANCHO};
@@ -180,7 +198,6 @@ SDL_RenderDrawRect(renderer, &masa_fija_2);
         SDL_RenderDrawRect(renderer, &masa_2);
 
 
-        
         // END código del alumno
 
          SDL_RenderPresent(renderer);
