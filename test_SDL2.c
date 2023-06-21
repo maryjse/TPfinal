@@ -30,31 +30,39 @@ void escribir_texto(SDL_Renderer *renderer, TTF_Font *font, const char *s, int x
 #endif
 
 //PRUEBA:
+
     typedef struct masas{
-        masa_t **masa;
+        masa_t *masa[10];
         size_t masas_totales;
     } masas_t;
 
-    masas_t *m = malloc(sizeof(masas_t));
+    masas_t *masas_crear() {
+        masas_t *m = malloc(sizeof(masas_t));
+        if(m == NULL)
+            return NULL;
+        
+        m->masas_totales = 0;
 
-    bool agregar_masa(masas_t *m, int xi, int yi){
-            
-        m -> masa = malloc( 10 * sizeof(masa_t*));
-        if(m -> masa == NULL){
-            return false;
-        }
-        m->masa[m -> masas_totales] = masa_crear(xi, yi);
+        for(size_t i = 0; i < MASA_TOTAL; i++)
+            m->masa[i] = masa_crear(-100,-100);
+        
+        return m;
+    }
+
+    bool agregar_masa(masas_t *m, int xi, int yi) {
+        //m -> masa = malloc( 10 * sizeof(masa_t*));
+       // if(m -> masa == NULL){
+          //  return false;
+        //}
+        cambiar_posicion_masa(m -> masa[m -> masas_totales], xi, yi);
         
         m->masas_totales++;
         return true;
     }
 
-    // masas_t *m = malloc(sizeof(masas_t));
-    // m -> masa[0] = masa_crear(0,0);
-    // m ->masa[1] = masa_crear(0,0);
-
 int main(int argc, char *argv[]) {
     SDL_Init(SDL_INIT_VIDEO);
+    masas_t *m = masas_crear();
 
 #ifdef TTF
     TTF_Init();
@@ -94,8 +102,8 @@ int main(int argc, char *argv[]) {
                 inicioy = event.motion.y;
 
                 //PRUEBA:
-
-                agregar_masa(m,iniciox,inicioy);
+                if(m -> masas_totales < MASA_TOTAL)
+                agregar_masa(m, iniciox, inicioy);
 
                 //if(agregar_masa(m, iniciox, inicioy)) {
                  //   cambiar_posicion_masa(m -> masa[i], iniciox, inicioy);
@@ -182,27 +190,36 @@ SDL_RenderDrawRect(renderer, &masa_fija_2);
         }
 
         //PRUEBA:
+        
+        //Matriz que guarda las posiciones de las masas
+        size_t posiciones[10][2];
+       
 
-        size_t pos1x, pos1y;
-        size_t pos2x, pos2y; //HABRIA QUE HACER UN VECTOR QUE GUARDE LAS POSICIONES
-
-        //masa_t *m1 = masa_crear(iniciox, inicioy);
-
-        // for(size_t i = 0; i < m->masas_totales; i++) {
-        //     obtener_posicion(m->masa[i], pos2x, pos2y);
-        // }
-
-        obtener_posicion(m->masa[0], &pos1x, &pos1y);
-        obtener_posicion(m->masa[1], &pos2x, &pos2y);
+        for(size_t i = 0; i < m -> masas_totales; i++){
+            obtener_posicion(m -> masa[i], &posiciones[i][0],&posiciones[i][1]);
+            }
 
         SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
-        SDL_Rect masa_1 = {pos1x - ANCHO/2, pos1y - ANCHO/2, ANCHO, ANCHO};
-        SDL_RenderDrawRect(renderer, &masa_1);
 
-        SDL_Rect masa_2 = {pos2x - ANCHO/2, pos2y - ANCHO/2, ANCHO, ANCHO};
-        SDL_RenderDrawRect(renderer, &masa_2);
+       //Tabla de busqueda para las masas 
+        SDL_Rect masas[] ={
+            [0] = {posiciones[0][0] - ANCHO/2, posiciones[0][1] - ANCHO/2, ANCHO, ANCHO},
+            [1] = {posiciones[1][0] - ANCHO/2, posiciones[1][1] - ANCHO/2, ANCHO, ANCHO},
+            [2] = {posiciones[2][0] - ANCHO/2, posiciones[2][1] - ANCHO/2, ANCHO, ANCHO},
+            [3] = {posiciones[3][0] - ANCHO/2, posiciones[3][1] - ANCHO/2, ANCHO, ANCHO},
+            [4] = {posiciones[4][0] - ANCHO/2, posiciones[4][1] - ANCHO/2, ANCHO, ANCHO},
+            [5] = {posiciones[5][0] - ANCHO/2, posiciones[5][1] - ANCHO/2, ANCHO, ANCHO},
+            [6] = {posiciones[6][0] - ANCHO/2, posiciones[6][1] - ANCHO/2, ANCHO, ANCHO},
+            [7] = {posiciones[7][0] - ANCHO/2, posiciones[7][1] - ANCHO/2, ANCHO, ANCHO},
+            [8] = {posiciones[8][0] - ANCHO/2, posiciones[8][1] - ANCHO/2, ANCHO, ANCHO},
+            [9] = {posiciones[9][0] - ANCHO/2, posiciones[9][1] - ANCHO/2, ANCHO, ANCHO},
+        };
 
-
+        //Dibujado de las masas
+        for(size_t i = 0; i < m -> masas_totales; i++){
+            SDL_RenderDrawRect(renderer, &masas[i]);
+        }   
+        
         // END código del alumno
 
          SDL_RenderPresent(renderer);
