@@ -28,7 +28,7 @@ void obtener_posicion(const masa_t *m, size_t *pos_x, size_t *pos_y);
 bool hay_masa(size_t x, size_t y);
 //Itero todas las masas que tengo en la simulacion y si consigo una en esa posicion devuelvo true.
 
-void cambiar_posicion_masa(masa_t *masa, size_t nueva_x, size_t nueva_y); //Recibe un puntero a masa y cambia su posicion.
+bool cambiar_posicion_masa(masa_t *masa, size_t nueva_x, size_t nueva_y); //Recibe un puntero a masa y cambia su posicion.
 //Pre: La masa no es NULL. 
 
 #endif

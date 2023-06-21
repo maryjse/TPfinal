@@ -75,8 +75,6 @@ int main(int argc, char *argv[]) {
 
                 */
                 
-                
-
             }
             else if(event.type == SDL_MOUSEMOTION) {
                 coordx = event.motion.x;
