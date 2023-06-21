@@ -4,7 +4,6 @@ CFLAGS = -c -lSDL2 -lSDL2_ttf -DTTF
 
 $(PROGRAM): masa.o test_SDL2.o 
 	$(CC) masa.o test_SDL2.o -o $(PROGRAM) -lSDL2 -lSDL2_ttf -DTTF
-	$(CC) masa.o test_SDL2.o -o $(PROGRAM)
 
 masa.o: masa.c masa.h
 	$(CC) $(CFLAGS) masa.c
