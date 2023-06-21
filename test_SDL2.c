@@ -54,6 +54,7 @@ int main(int argc, char *argv[]) {
     bool estoy_dibujando = false;
     int coordx = 0, coordy = 0;
      int iniciox, inicioy;
+     masa_t *m1;
     // END código del alumno
 
     unsigned int ticks = SDL_GetTicks();
@@ -67,7 +68,8 @@ int main(int argc, char *argv[]) {
                 estoy_dibujando = true;
                 iniciox = event.motion.x;
                 inicioy = event.motion.y;
-
+                
+                m1 = masa_crear(iniciox, inicioy);
                
                 /*
                 if(!hay_masa(iniciox, inicioy)){
@@ -149,9 +151,17 @@ SDL_RenderDrawRect(renderer, &masa_fija_2);
 
         }
 
+        size_t pos1x, pos1y;
+
+        obtener_posicion(m1,&pos1x,&pos1y);
+
          SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
-        SDL_Rect masa_1 = {iniciox - ANCHO/2, inicioy - ANCHO/2, ANCHO, ANCHO};
+        SDL_Rect masa_1 = {pos1x - ANCHO/2, pos1y - ANCHO/2, ANCHO, ANCHO};
         SDL_RenderDrawRect(renderer, &masa_1);
+
+        SDL_Rect masa_2 = {iniciox - ANCHO/2, inicioy - ANCHO/2, ANCHO, ANCHO};
+        SDL_RenderDrawRect(renderer, &masa_2);
+
 
         
         // END código del alumno
