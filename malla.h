@@ -4,9 +4,10 @@
 #include "lista.h"
 #include "masa.h"
 #include "resorte.h"
+#include "config.h"
 
-typedef struct masas{
-    masa_t *masa[MASA_TOTAL];
+typedef struct masas {
+    masa_t *masa[10];
     size_t masas_totales;
 } masas_t;
 
@@ -18,6 +19,22 @@ typedef struct resortes {
 //TDA que representa una malla.
 //Contiene las masas y los resortes creados.
 typedef struct malla malla_t;
+
+//Crea la malla.
+//Post: En caso de no poder crear la malla devuelve NULL.
+malla_t malla_crear(masas_t masas, resortes_t resortes) {
+    malla_t malla = malloc(sizeof(malla_t));
+    if(malla = NULL)
+        return NULL;
+    
+    malla->masa = malloc(sizeof(masas_t));
+    malla->masas_totales = 0;
+    
+    for(size_t i = 0; i < MASA_TOTAL; i++)
+        m->masa[i] = masa_crear(-100,-100);
+    
+    return m;
+}
 
 //Destruye la malla.
 //Pre: la masa y los resortes deben existir previamente.
