@@ -53,7 +53,7 @@ int main(int argc, char *argv[]) {
     // BEGIN código del alumno
     bool estoy_dibujando = false;
     int coordx = 0, coordy = 0;
-     int iniciox, inicioy;
+    int iniciox, inicioy;
     // END código del alumno
 
     unsigned int ticks = SDL_GetTicks();
@@ -149,7 +149,6 @@ SDL_RenderDrawRect(renderer, &masa_fija_2);
 
         }
 
-        
         // END código del alumno
 
          SDL_RenderPresent(renderer);

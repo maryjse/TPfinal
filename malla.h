@@ -1,3 +1,5 @@
+#include "lista.h"
+
 //TDA malla:
 //La malla debe relacionar las masas con los resortes.
 

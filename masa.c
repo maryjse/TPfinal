@@ -15,7 +15,7 @@ void masa_destruir(masa_t *m) {
     free(m);   
 }
 
-void obtener_posicion(const masa_t *m, size_t *pos_x, size_t *pos_y){
+void obtener_posicion(const masa_t *m, size_t *pos_x, size_t *pos_y) {
     *pos_x = m -> x;
     *pos_y = m -> y;
 }
