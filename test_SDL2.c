@@ -31,21 +31,20 @@ void escribir_texto(SDL_Renderer *renderer, TTF_Font *font, const char *s, int x
 
 //PRUEBA:
     typedef struct masas{
-        masa_t *masa;
-        size_t masas_totales = 0;
+        masa_t **masa;
+        size_t masas_totales;
     } masas_t;
 
     masas_t *m = malloc(sizeof(masas_t));
 
-    bool agregar_masa(masas_t *m, int xi, int yi) {
-        for(size_t i = 0; i < m->masas_totales; i++)
-            m->masa[i] = masa_crear(xi, yi);
+    bool agregar_masa(masas_t *m, int xi, int yi){
+            
+        m -> masa = malloc( 10 * sizeof(masa_t*));
+        if(m -> masa == NULL){
+            return false;
+        }
+        m->masa[m -> masas_totales] = masa_crear(xi, yi);
         
-        masa_t *aux = realloc(m->masa, (m->masas_totales) * sizeof(masa_t));
-            if(aux == NULL)
-                return false;
-        
-        m->masa = aux;
         m->masas_totales++;
         return true;
     }
@@ -96,9 +95,11 @@ int main(int argc, char *argv[]) {
 
                 //PRUEBA:
 
-                if(agregar_masa(m, iniciox, inicioy)) {
-                    cambiar_posicion_masa(m -> masa[i], iniciox, inicioy);
-                }
+                agregar_masa(m,iniciox,inicioy);
+
+                //if(agregar_masa(m, iniciox, inicioy)) {
+                 //   cambiar_posicion_masa(m -> masa[i], iniciox, inicioy);
+               // }
                
                 /*
                 if(!hay_masa(iniciox, inicioy)){
@@ -191,8 +192,8 @@ SDL_RenderDrawRect(renderer, &masa_fija_2);
         //     obtener_posicion(m->masa[i], pos2x, pos2y);
         // }
 
-        obtener_posicion(m->masa[0], pos1x, pos1y);
-        obtener_posicion(m->masa[1], pos2x, pos2y);
+        obtener_posicion(m->masa[0], &pos1x, &pos1y);
+        obtener_posicion(m->masa[1], &pos2x, &pos2y);
 
         SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_Rect masa_1 = {pos1x - ANCHO/2, pos1y - ANCHO/2, ANCHO, ANCHO};
