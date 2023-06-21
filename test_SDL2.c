@@ -1,6 +1,11 @@
 #include <SDL2/SDL.h>
 #include <stdbool.h>
-
+#include "lista.h"
+//#include "malla.h"
+#include "masa.h"
+//#include "resorte.h"
+//#include "simulacion.h"
+#define ANCHO 10
 #include "config.h"
 
 #ifdef TTF
@@ -62,6 +67,11 @@ int main(int argc, char *argv[]) {
                 estoy_dibujando = true;
                 iniciox = event.motion.x;
                 inicioy = event.motion.y;
+
+                SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+                SDL_Rect masa_1 = {iniciox - ANCHO/2, iniciox - ANCHO/2, ANCHO, ANCHO};
+                SDL_RenderDrawRect(renderer, &masa_1);
+
                 /*
                 if(!hay_masa(iniciox, inicioy)){
                     masa_t *m1 = crear_masa();
@@ -85,13 +95,16 @@ int main(int argc, char *argv[]) {
             else if(event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT) {
 
                 //Si no hay masa creo una masa:
-                //masa_t *mi = masa_crear();
+                //masa_t *m1 = masa_crear(coordx, coordy);
+                
                 //lista_insertar_ultimo(resorte_i,mi);
 
                 //Si ya existe una masa hago:
                 //lista_insertar_ultimo(resorte_i,masa_existente);
 
                 estoy_dibujando = false;
+
+            
             }
             // END código del alumno
 
@@ -104,6 +117,7 @@ int main(int argc, char *argv[]) {
         // BEGIN código del alumno
 #ifdef TTF
         escribir_texto(renderer, font, "Mono Bridge", 100, 20);
+        escribir_texto(renderer, font, "Nivel 1", 100, 60); //Nombre del nivel
         char aux[100];
         sprintf(aux, "%03d, %03d", coordx, coordy);
         escribir_texto(renderer, font, aux, VENTANA_ANCHO - 100, VENTANA_ALTO - 34);
@@ -131,7 +145,11 @@ SDL_RenderDrawRect(renderer, &masa_fija_2);
 
             SDL_Rect r2 = {iniciox - ancho/2, inicioy - ancho/2, ancho, ancho};
             SDL_RenderDrawRect(renderer, &r2);
+
+
         }
+
+        
         // END código del alumno
 
          SDL_RenderPresent(renderer);
