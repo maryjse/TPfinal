@@ -24,9 +24,9 @@ bool hay_masa(size_t x, size_t y){ //Esta funcion creo que es mejor desarrollarl
 }
 
 bool cambiar_posicion_masa(masa_t *masa, size_t nueva_x, size_t nueva_y){
-    if(hay_masa(nueva_x, nueva_y)) {
-        return false;
-    }
+    //if(hay_masa(nueva_x, nueva_y)) {
+      //  return false;
+   // }
 
     masa->x = nueva_x;
     masa->y = nueva_y;
