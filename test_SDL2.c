@@ -68,10 +68,7 @@ int main(int argc, char *argv[]) {
                 iniciox = event.motion.x;
                 inicioy = event.motion.y;
 
-                SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
-                SDL_Rect masa_1 = {iniciox - ANCHO/2, iniciox - ANCHO/2, ANCHO, ANCHO};
-                SDL_RenderDrawRect(renderer, &masa_1);
-
+               
                 /*
                 if(!hay_masa(iniciox, inicioy)){
                     masa_t *m1 = crear_masa();
@@ -85,6 +82,8 @@ int main(int argc, char *argv[]) {
 
                 */
                 
+                
+
             }
             else if(event.type == SDL_MOUSEMOTION) {
                 coordx = event.motion.x;
@@ -94,6 +93,7 @@ int main(int argc, char *argv[]) {
             }
             else if(event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT) {
 
+                
                 //Si no hay masa creo una masa:
                 //masa_t *m1 = masa_crear(coordx, coordy);
                 
@@ -148,6 +148,10 @@ SDL_RenderDrawRect(renderer, &masa_fija_2);
 
 
         }
+
+         SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+        SDL_Rect masa_1 = {iniciox - ANCHO/2, inicioy - ANCHO/2, ANCHO, ANCHO};
+        SDL_RenderDrawRect(renderer, &masa_1);
 
         
         // END código del alumno
