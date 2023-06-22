@@ -8,15 +8,10 @@
 #include "config.h"
 #include "lista.h"
 
-// typedef struct masas {
-//     masa_t *masa[10];
-//     size_t masas_totales;
-// } masas_t;
-
-// typedef struct resortes {
-//     resorte_t *resorte;
-//     size_t resortes_totales;
-// } resortes_t;
+typedef struct masas {
+    masa_t *masa[10];
+    size_t masas_totales;
+} masas_t;
 
 //TDA que representa una malla.
 //Contiene las masas y los resortes creados.
@@ -33,11 +28,6 @@ void malla_destruir(malla_t *malla);
 
 //Mueve un nodo de la malla.
 void mover_nodo(malla_t *malla);
-
-//Agrega una masa a la malla.
-//Pre: Masa != NULL.
-//Post: Si el agregado fue existoso devuelve true.
-masa_t *agregar_masa(malla_t *malla, size_t x, size_t y);
 
 //Agrega un resorte a la malla.
 //Pre: Resorte != NULL.
@@ -63,6 +53,10 @@ size_t obtener_masas_totales(malla_t *malla);
 //Post: Devuelve true si se destruyo una masa en esa posicion
 bool borrar_masa(masas_t *m, size_t pos_x, size_t pos_y);
 
+//Agrega una masa a la malla.
+//Pre: Masa != NULL.
+//Post: Si el agregado fue existoso devuelve true.
+bool agregar_masa(malla_t *malla, size_t x, size_t y);
 
 //NOTAS:
 

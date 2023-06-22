@@ -26,7 +26,7 @@ void escribir_texto(SDL_Renderer *renderer, TTF_Font *font, const char *s, int x
 #endif
 
 //PRUEBA:
-    // typedef struct masas{
+    // typedef struct masas {
     //     masa_t *masa[10];
     //     size_t masas_totales;
     // } masas_t;
@@ -44,6 +44,7 @@ void escribir_texto(SDL_Renderer *renderer, TTF_Font *font, const char *s, int x
     //     return m;
     // }
 
+    // masas
     // bool agregar_masa(masas_t *m, int xi, int yi) {
     //     //m -> masa = malloc( 10 * sizeof(masa_t*));
     //    // if(m -> masa == NULL){
