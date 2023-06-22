@@ -1,20 +1,22 @@
 #ifndef MALLA_H
 #define MALLA_H
 
-#include "lista.h"
+#define RESORTES_TOTALES 30
+
 #include "masa.h"
 #include "resorte.h"
 #include "config.h"
+#include "lista.h"
 
-typedef struct masas {
-    masa_t *masa[10];
-    size_t masas_totales;
-} masas_t;
+// typedef struct masas {
+//     masa_t *masa[10];
+//     size_t masas_totales;
+// } masas_t;
 
-typedef struct resortes {
-    lista_t *resorte;
-    size_t resortes_totales;
-} resortes_t;
+// typedef struct resortes {
+//     resorte_t *resorte;
+//     size_t resortes_totales;
+// } resortes_t;
 
 //TDA que representa una malla.
 //Contiene las masas y los resortes creados.
@@ -22,19 +24,7 @@ typedef struct malla malla_t;
 
 //Crea la malla.
 //Post: En caso de no poder crear la malla devuelve NULL.
-malla_t malla_crear(masas_t masas, resortes_t resortes) {
-    malla_t malla = malloc(sizeof(malla_t));
-    if(malla = NULL)
-        return NULL;
-    
-    malla->masa = malloc(sizeof(masas_t));
-    malla->masas_totales = 0;
-    
-    for(size_t i = 0; i < MASA_TOTAL; i++)
-        m->masa[i] = masa_crear(-100,-100);
-    
-    return m;
-}
+malla_t *malla_crear();
 
 //Destruye la malla.
 //Pre: la masa y los resortes deben existir previamente.
@@ -47,7 +37,7 @@ void mover_nodo(malla_t *malla);
 //Agrega una masa a la malla.
 //Pre: Masa != NULL.
 //Post: Si el agregado fue existoso devuelve true.
-bool agregar_masa();
+masa_t *agregar_masa(malla_t *malla, size_t x, size_t y);
 
 //Agrega un resorte a la malla.
 //Pre: Resorte != NULL.
@@ -59,10 +49,20 @@ bool agregar_resorte();
 bool malla_esta_vacia();
 
 //Verfica si hay una masa en la posicion indicada.
-bool hay_masa();
+bool hay_masa(malla_t *malla,size_t pos_x, size_t pos_y);
 
 //Verfica si hay un resorte en la posicion indicada.
 bool hay_resorte();
+
+//Devuelve por nombre la cantidad de masas totales en la malla
+//Pre: La malla que se le pasa fue creada
+size_t obtener_masas_totales(malla_t *malla);
+
+//Borra la masa que haya en la posicion dada, en caso de haberla
+//Pre: La malla fue creada
+//Post: Devuelve true si se destruyo una masa en esa posicion
+bool borrar_masa(masas_t *m, size_t pos_x, size_t pos_y);
+
 
 //NOTAS:
 

@@ -1,19 +1,17 @@
 #include "resorte.h"
 #include "config.h"
-#include "lista.h"
-#include<stdlib.h>
-#include<stdbool.h>
-#include<math.h>
+#include <stdlib.h>
+#include <math.h>
 
-resorte_t *resorte_crear(int x_inicial, int y_inicial){
-    resorte_t *resorte = malloc(sizeof(resorte_t));
-    if (resorte == NULL){
+resorte_t *resorte_crear(int xi, int yi) {
+    resorte_t *r = malloc(sizeof(resorte_t));
+    if (r == NULL)
         return NULL;
-    }
-    resorte -> pos_inicial[0] = x_inicial;
-    resorte -> pos_inicial[1] = y_inicial;
+    
+    r -> pos_inicial[0] = xi;
+    r -> pos_inicial[1] = yi;
 
-    return resorte;
+    return r;
 }
 
 bool resorte_agregar_final(resorte_t *resorte, int x_final, int y_final){
@@ -31,8 +29,5 @@ void resorte_destruir(resorte_t *resorte){
     free(resorte);
 }
 
-bool hay_resorte(int pos_x, int pos_y){
-    
-}
 
 

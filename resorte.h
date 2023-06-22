@@ -1,20 +1,26 @@
 #ifndef RESORTE_H
 #define RESORTE_H
 
-#include<stdlib.h>
-#include<lista.h>
-#include<stdbool.h>
+#include "lista.h"
+#include <stdlib.h>
 
-//TDA resorte:
+//TDA que representa un resorte.
+//Contiene la longitud del resorte, y dos vectores de longitud 2 que guarda sus x e y.
+//La posición inicial donde se inicia la creación del resorte
+//y posiciones donde finaliza el resorte.
+typedef struct resorte {
+    size_t longitud; 
+    int pos_inicial[2];
+    int pos_final[2];
+} resorte_t;
 
-typedef struct resorte{
-size_t longitud; //Longitud del resorte
-int pos_inicial[2]; // Posiciones donde se inicie la creacion del resorte. pos_inicial[0] = xi
-//pos_inicial[1] = yi
-int pos_final[2];//Posiciones donde se finalice el resorte
-}resorte_t;
 
 
+
+
+
+
+//Crea un resorte
 resorte_t *resorte_crear(int x_inicial, int y_inicial); //Funcion que crea un nuevo resorte
 //Pre: recibe las posiciones donde se creo una masa previamente
 //Post: devuelve un resorte nuevo o NULL en caso de falla
