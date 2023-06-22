@@ -55,7 +55,7 @@ void escribir_texto(SDL_Renderer *renderer, TTF_Font *font, const char *s, int x
     //     return true;
     // }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[]){
     SDL_Init(SDL_INIT_VIDEO);
 
 #ifdef TTF
@@ -81,19 +81,21 @@ int main(int argc, char *argv[]) {
     int coordx = 0, coordy = 0;
     int iniciox, inicioy;
     int derechox, derechoy;
-    masa_t *masa_i[10];
-    malla_t *malla = malla_crear();
+    // masa_t *masa_i[10];
+    // malla_t *malla = malla_crear();
+    masas_t *m = crear_masas();
     size_t masas_totales;
     // END código del alumno
 
     unsigned int ticks = SDL_GetTicks();
     while(1) {
+        masas_totales = obtener_masas_totales(m);
         if(SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT)
                 break;
             
             // BEGIN código del alumno
-            masas_totales = obtener_masas_totales(malla);
+           // masas_totales = obtener_masas_totales(malla);
             if(event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT) {
                 estoy_dibujando = true;
                 iniciox = event.motion.x;
@@ -102,8 +104,10 @@ int main(int argc, char *argv[]) {
 
                 //PRUEBA:
                 
-                if(masas_totales < MASA_TOTAL)
-                    masa_i[masas_totales] = agregar_masa(malla, iniciox, inicioy);
+                 if(masas_totales < MASA_TOTAL){
+                    asignar_posicion_masa(m, iniciox, inicioy);
+                 }
+                //     masa_i[masas_totales] = agregar_masa(malla, iniciox, inicioy);
                
                 /*
             else if(event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT && event.type == SDL_MOUSEMOTION){
@@ -114,12 +118,12 @@ int main(int argc, char *argv[]) {
                 */
             }
 
-            else if(event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_RIGHT){
-                derechox = event.motion.x;
-                derechoy = event.motion.y;
+            // else if(event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_RIGHT){
+            //     derechox = event.motion.x;
+            //     derechoy = event.motion.y;
+                
 
-
-            }
+            // }
 
             else if(event.type == SDL_MOUSEMOTION) {
                 coordx = event.motion.x;
@@ -191,7 +195,7 @@ int main(int argc, char *argv[]) {
        
 
         for(size_t i = 0; i < masas_totales; i++){
-            obtener_posicion(masa_i[i], &posiciones[i][0], &posiciones[i][1]);
+           iterar_posiciones_masa(m, &posiciones[i][0], &posiciones[i][1], i);
         }
 
         SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
@@ -213,6 +217,7 @@ int main(int argc, char *argv[]) {
         //Dibujado de las masas
         for(size_t i = 0; i < masas_totales; i++){
             SDL_RenderDrawRect(renderer, &masas[i]);
+
         }
         
         // for(size_t i = 0; i < masas_totales; i++){

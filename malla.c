@@ -1,34 +1,112 @@
 #include "malla.h"
+#include<stdlib.h>
 
-struct malla {
-    lista_t *masas;
-    lista_t *resortes;
-};
+typedef struct masas{
+	size_t *xi;
+	size_t *yi;
+	masa_t *masa[10];
+	//bool *es_fijo;
+    size_t masa_actual;
+}masas_t;
 
-malla_t *malla_crear() {
-    malla_t *malla = malloc(sizeof(malla_t));
-    malla->masas = lista_crear();
-    malla->resortes = lista_crear();
-}
+masas_t *crear_masas(){
 
-void malla_destruir(malla_t *malla) {
-    lista_destruir(malla->masas, masa_destruir);
-    lista_destruir(malla->resortes, resorte_destruir);
-    free(malla);
-}
-
-masa_t *agregar_masa(malla_t *malla, size_t x, size_t y) {
-    masa_t *masa = masa_crear(x, y);
-    if(masa == NULL)
+    masas_t *m = malloc(sizeof(masas_t));
+    if(m == NULL){
         return NULL;
+    }
+    m -> xi = malloc(10*sizeof(size_t));
+    if(m -> xi == NULL){
+        free(m);
+        return NULL;
+    }
+    m -> yi = malloc(10*sizeof(size_t));
+    if(m -> yi == NULL){
+        free(m -> xi);
+        free(m);
+        return NULL;
+    }
+
+    // m -> es_fijo = malloc(10*sizeof(bool));
+    // if(m ->es_fijo == NULL){
+    //     free(m -> xi);
+    //     free(m -> yi);
+    //     free(m);
+    // }
+
+    m -> masa_actual = 0;
     
-    lista_insertar_primero(malla->masas, masa);
-    return masa;
+    for(size_t i = 0; i < MASA_TOTAL; i++){
+        m->masa[i] = masa_crear(-100,-100);
+    }
+
+    return m;
+
+}
+bool asignar_posicion_masa(masas_t *m, size_t pos_x, size_t pos_y){
+    if(m -> masa_actual > 9){
+        return false;
+    }
+    cambiar_posicion_masa(m -> masa[m -> masa_actual], pos_x, pos_y);
+    m -> xi[m -> masa_actual] = pos_x;
+    m -> yi[m -> masa_actual] = pos_y;
+    m -> masa_actual++;
+    return true;
 }
 
-bool obtener_posicion(malla_t *malla, void (*posicion)(void *, size_t *, size_t*)) {
-    posicion(malla -> masas -> dato, *)
+void iterar_posiciones_masa(masas_t *m, size_t *pos_x, size_t *pos_y, size_t i){
+    *pos_x = m -> xi[i];
+    *pos_y = m -> yi[i];
 }
+
+bool borrar_masa(masas_t *m, size_t pos_x, size_t pos_y){
+    for(size_t i = 0; i <= m -> masa_actual; i++){
+        if(m -> xi[i] == pos_x && m -> yi[i] == pos_y){
+            cambiar_posicion_masa(m -> masa[i], -100, -100);
+            m -> xi[i] = -100;
+            m -> yi[i] = -100;
+            m -> masa_actual--;
+            return true;
+        }
+    }
+    return false;
+}
+
+size_t obtener_masas_totales(masas_t *m){
+    return m -> masa_actual;
+}
+
+
+
+// struct malla {
+//     lista_t *masas;
+//     lista_t *resortes;
+// };
+
+// malla_t *malla_crear() {
+//     malla_t *malla = malloc(sizeof(malla_t));
+//     malla->masas = lista_crear();
+//     malla->resortes = lista_crear();
+// }
+
+// void malla_destruir(malla_t *malla) {
+//     lista_destruir(malla->masas, masa_destruir);
+//     lista_destruir(malla->resortes, resorte_destruir);
+//     free(malla);
+// }
+
+// masa_t *agregar_masa(malla_t *malla, size_t x, size_t y) {
+//     masa_t *masa = masa_crear(x, y);
+//     if(masa == NULL)
+//         return NULL;
+    
+//     lista_insertar_primero(malla->masas, masa);
+//     return masa;
+// }
+
+// bool obtener_posicion(malla_t *malla, void (*posicion)(void *, size_t *, size_t*)) {
+//     posicion(malla -> masas -> dato, *)
+// }
 
 
 

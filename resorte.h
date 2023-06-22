@@ -2,12 +2,13 @@
 #define RESORTE_H
 
 #include "lista.h"
-#include <stdlib.h>
+#include<stdlib.h>
 
 //TDA que representa un resorte.
 //Contiene la longitud del resorte, y dos vectores de longitud 2 que guarda sus x e y.
 //La posición inicial donde se inicia la creación del resorte
 //y posiciones donde finaliza el resorte.
+
 typedef struct resorte {
     size_t longitud; 
     int pos_inicial[2];

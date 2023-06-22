@@ -20,49 +20,60 @@
 
 //TDA que representa una malla.
 //Contiene las masas y los resortes creados.
-typedef struct malla malla_t;
 
-//Crea la malla.
-//Post: En caso de no poder crear la malla devuelve NULL.
-malla_t *malla_crear();
+typedef struct masas masas_t;
+
+//Crea las masas.
+//Post: En caso de no poder crear las masas devuelve NULL.
+masas_t *crear_masas();
 
 //Destruye la malla.
 //Pre: la masa y los resortes deben existir previamente.
 //Post: destruye todas las masas y los resortes.
-void malla_destruir(malla_t *malla);
+//void malla_destruir(malla_t *malla);
 
 //Mueve un nodo de la malla.
-void mover_nodo(malla_t *malla);
+//void mover_nodo(malla_t *malla);
 
 //Agrega una masa a la malla.
 //Pre: Masa != NULL.
 //Post: Si el agregado fue existoso devuelve true.
-masa_t *agregar_masa(malla_t *malla, size_t x, size_t y);
+
+
+//Asigna las posiciones de las masas en la malla
+//Pre: La malla fue previamente creada
+//Post: Asigna las posiciones de las masas, en orden dentro de la malla 
+bool asignar_posicion_masa(masas_t *m, size_t pos_x, size_t pos_y);
+
+
+//masas_t *agregar_masa(malla_t *malla, size_t x, size_t y);
 
 //Agrega un resorte a la malla.
 //Pre: Resorte != NULL.
 //Post: Si el agregado fue existoso devuelve true.
-bool agregar_resorte();
+//bool agregar_resorte();
 
 //Verifica si hay alguna masa o resorte en la malla.
 //Post: Si esta vacia devuelve true.
-bool malla_esta_vacia();
+//bool malla_esta_vacia();
 
 //Verfica si hay una masa en la posicion indicada.
-bool hay_masa(malla_t *malla,size_t pos_x, size_t pos_y);
+//bool hay_masa(malla_t *malla,size_t pos_x, size_t pos_y);
 
 //Verfica si hay un resorte en la posicion indicada.
-bool hay_resorte();
+//bool hay_resorte();
 
 //Devuelve por nombre la cantidad de masas totales en la malla
 //Pre: La malla que se le pasa fue creada
-size_t obtener_masas_totales(malla_t *malla);
+size_t obtener_masas_totales(masas_t *m);
 
 //Borra la masa que haya en la posicion dada, en caso de haberla
 //Pre: La malla fue creada
 //Post: Devuelve true si se destruyo una masa en esa posicion
 bool borrar_masa(masas_t *m, size_t pos_x, size_t pos_y);
 
+//Iterador para obtener las posiciones de todas las masas dentro de la malla
+void iterar_posiciones_masa(masas_t *m, size_t *pos_x, size_t *pos_y, size_t i);
 
 //NOTAS:
 
