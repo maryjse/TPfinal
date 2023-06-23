@@ -85,17 +85,20 @@ int main(int argc, char *argv[]) {
     int finalrx, finalry;
     // masa_t *masa_i[10];
     // malla_t *malla = malla_crear();
-    masas_t *m = crear_masas();
+    //masas_t *m = crear_masas();
     resorte_t *r;
     size_t masas_totales;
 
     lista_t *lista_resortes = lista_crear();
+    lista_t *lista_masas = lista_crear();
     
     // END código del alumno
 
     unsigned int ticks = SDL_GetTicks();
     while(1) {
-        masas_totales = obtener_masas_totales(m);
+        //masas_totales = obtener_masas_totales(m);
+        masas_totales = lista_largo(lista_masas);
+
         if(SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT)
                 break;
@@ -109,10 +112,13 @@ int main(int argc, char *argv[]) {
                 //PRUEBA:      
                 if(masas_totales < MASA_TOTAL){
 
-                    if(!hay_masa(m, iniciox, inicioy)){  
-                        asignar_posicion_masa(m, iniciox, inicioy);         
-                    }
-                    r = resorte_crear(coordx, coordy);
+                    masa_t *m = masa_crear(iniciox, inicioy);
+                    lista_insertar_ultimo(lista_masas, m);
+
+                    // if(!hay_masa(m, iniciox, inicioy)){  
+                    //     asignar_posicion_masa(m, iniciox, inicioy);         
+                    // }
+                     r = resorte_crear(iniciox, inicioy);
                 }
             }
 
@@ -199,10 +205,16 @@ int main(int argc, char *argv[]) {
         //Matriz que guarda las posiciones de las masas
         size_t posiciones[10][2];
        
+         lista_iter_t *ld;
+         size_t i;
+        for(i = 0, ld = lista_iter_crear(lista_masas); !lista_iter_al_final(ld); lista_iter_avanzar(ld), i++) {
+            //iterar_posiciones_masa(m, &posiciones[i][0], &posiciones[i][1], i);
+            masa_t *m = lista_iter_ver_actual(ld);
 
-        for(size_t i = 0; i < masas_totales; i++) {
-            iterar_posiciones_masa(m, &posiciones[i][0], &posiciones[i][1], i);
+            obtener_posicion(m, &posiciones[i][0], &posiciones[i][1]);
+            
         }
+        lista_iter_destruir(ld);
 
         SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 
