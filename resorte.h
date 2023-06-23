@@ -32,6 +32,7 @@ bool hay_resorte(int pos_x, int pos_y); //Comprueba si hay un resorte en esa pos
 //No se como hacer esta funcion, pero se me ocurre que si las posiciones estan entre una recta trazada entre
 //pos_inicial y pos_final de algun resorte de la lista sea true;
 
+void obtener_posiciones(resorte_t *r, int *inicial, int *final);
 //debo usar la lista que se da en clase para guardar los resortes
 //cuando el usuario clickee sobre una masa creada se inicia la creacion de un resorte
 

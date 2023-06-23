@@ -8,16 +8,6 @@
 #include "config.h"
 #include "lista.h"
 
-// typedef struct masas {
-//     masa_t *masa[10];
-//     size_t masas_totales;
-// } masas_t;
-
-// typedef struct resortes {
-//     resorte_t *resorte;
-//     size_t resortes_totales;
-// } resortes_t;
-
 //TDA que representa una malla.
 //Contiene las masas y los resortes creados.
 

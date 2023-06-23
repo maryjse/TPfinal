@@ -81,8 +81,7 @@ int main(int argc, char *argv[]){
                     if(!hay_masa(m, iniciox, inicioy)){  
                         asignar_posicion_masa(m, iniciox, inicioy);         
                     }
-
-                    r = resorte_crear(iniciox, inicioy);
+                    r = resorte_crear(coordx, coordy);
                 }
             }
 
@@ -92,20 +91,28 @@ int main(int argc, char *argv[]){
                 
 
             // }
-
             else if(event.type == SDL_MOUSEMOTION) {
                 coordx = event.motion.x;
                 coordy = event.motion.y;
                 
             }
 
+            else if(event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT && event.type == SDL_MOUSEMOTION){
+
+                if(hay_masa(m, coordx, coordy)) {
+                    cambiar_posicion_masa(m -> masa, coordx, coordy);
+                }
+            }
+
+
             else if(event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT) {
 
-                    finalrx = event.motion.x;
-                    finalry = event.motion.y;
-                   
+                finalrx = event.motion.x;
+                finalry = event.motion.y;
                 if(resorte_agregar_final(r, finalrx, finalry))
                     lista_insertar_ultimo(lista_resortes, r);
+
+                    
                 //Si no hay masa creo una masa:
                 //masa_t *m1 = masa_crear(coordx, coordy);
                 
@@ -155,11 +162,6 @@ int main(int argc, char *argv[]){
             SDL_Rect r2 = {iniciox - ancho/2, inicioy - ancho/2, ancho, ancho};
             SDL_RenderDrawRect(renderer, &r2);
 
-            if(resorte_agregar_final(r, coordx, coordy)){
-                SDL_RenderDrawLine(renderer, iniciox, inicioy, coordx, coordy);
-            }
-                
-
 
         }
 
@@ -191,19 +193,19 @@ int main(int argc, char *argv[]){
         //Dibujado de las masas
         for(size_t i = 0; i < masas_totales; i++){
             SDL_RenderDrawRect(renderer, &masas[i]);
+            
         }
-        
+
         lista_iter_t *li;
         for (li = lista_iter_crear(lista_resortes); !lista_iter_al_final(li); lista_iter_avanzar(li)) {
             resorte_t *resorte = lista_iter_ver_actual(li);
-            printf("Xinicial: %d\n", resorte->pos_inicial[0]);
-            printf("Yinicial: %d\n", resorte->pos_inicial[1]);
-            printf("Xfinal: %d\n", resorte->pos_final[0]);
-            printf("Yfinal: %d\n", resorte->pos_final[1]);
-            SDL_RenderDrawLine(renderer, resorte -> pos_inicial[0], resorte -> pos_final[1], resorte ->pos_final[0], resorte ->pos_final[1]);
+            int iniciales[2];
+            int finales[2];
+            obtener_posiciones(resorte, iniciales, finales);
+            SDL_RenderDrawLine(renderer, iniciales[0], iniciales[1], finales[0], finales[1]);
         }
         lista_iter_destruir(li);
-
+       
        
         
         // for(size_t i = 0; i < masas_totales; i++){
