@@ -6,9 +6,10 @@
 
 //TDA que representa una masa.
 //Contiene la posición inicial de la masa y su valor.
+//Todas las masas son iguales.
 typedef struct masa{
     size_t x, y;
-    float masa; //tenemos que ver que masa tendra la masa..
+    float masa; 
 } masa_t;
 
 //Crea una masa.
@@ -26,6 +27,6 @@ void obtener_posicion(const masa_t *m, size_t *pos_x, size_t *pos_y);
 
 //Cambia la posicion de una masa existente.
 //Pre: Masa != NULL.
-void cambiar_posicion_masa(masa_t *masa, size_t nueva_x, size_t nueva_y); 
+void cambiar_posicion_masa(masa_t *masa, size_t nueva_x, size_t nueva_y);
 
 #endif

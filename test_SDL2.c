@@ -25,7 +25,38 @@ void escribir_texto(SDL_Renderer *renderer, TTF_Font *font, const char *s, int x
 }
 #endif
 
-int main(int argc, char *argv[]){
+//PRUEBA:
+    // typedef struct masas {
+    //     masa_t *masa[10];
+    //     size_t masas_totales;
+    // } masas_t;
+
+    // masas_t *masas_crear() {
+    //     masas_t *m = malloc(sizeof(masas_t));
+    //     if(m == NULL)
+    //         return NULL;
+        
+    //     m->masas_totales = 0;
+
+    //     for(size_t i = 0; i < MASA_TOTAL; i++)
+    //         m->masa[i] = masa_crear(-100,-100);
+        
+    //     return m;
+    // }
+
+    // masas
+    // bool agregar_masa(masas_t *m, int xi, int yi) {
+    //     //m -> masa = malloc( 10 * sizeof(masa_t*));
+    //    // if(m -> masa == NULL){
+    //       //  return false;
+    //     //}
+    //     cambiar_posicion_masa(m -> masa[m -> masas_totales], xi, yi);
+        
+    //     m->masas_totales++;
+    //     return true;
+    // }
+
+int main(int argc, char *argv[]) {
     SDL_Init(SDL_INIT_VIDEO);
 
 #ifdef TTF

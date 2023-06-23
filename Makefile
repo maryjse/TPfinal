@@ -1,10 +1,11 @@
 PROGRAM = a.out
 CC = gcc
-CFLAGS = -Wall -pedantic -std=c99
-LDFLAGS = -lSDL2 -lSDL2_ttf -DTTF -lm
+CFLAGS = -c
+LDFLAGS = -lSDL2 -lSDL2_ttf -DTTF
+
 
 $(PROGRAM): masa.o test_SDL2.o malla.o resorte.o lista.o
-	$(CC) masa.o test_SDL2.o malla.o resorte.o lista.o -o $(PROGRAM) $(LDFLAGS)
+	$(CC) masa.o test_SDL2.o malla.o resorte.o lista.o -o $(PROGRAM) $(LDFLAGS) -lm
 
 masa.o: masa.c masa.h
 	$(CC) $(CFLAGS) masa.c
