@@ -1,31 +1,15 @@
 #include "malla.h"
 #include <stdlib.h>
 
-// typedef struct masas{
-// 	//size_t *xi;
-// 	//size_t *yi;
-// 	masa_t *masa[10];
-// 	//bool *es_fijo;
-//     size_t cant_masas;
-// } masas_t;
-
-typedef struct masas {
-    masa_t *masa[10];
-    size_t masas_totales;
+typedef struct masas{
+	size_t *xi;
+	size_t *yi;
+	masa_t *masa[10];
+	//bool *es_fijo;
+    size_t masa_actual;
 } masas_t;
 
-masas_t *masas_crear() {
-    masas_t *m = malloc(sizeof(masas_t));
-    if(m == NULL)
-        return NULL;
-        
-    m->masas_totales = 0;
-
-    for(size_t i = 0; i < 10; i++)
-         m->masa[i] = masa_crear(-100,-100);
-    return m;
-}
-
+//lista_t *lista_resortes = lista_crear();
 
 masas_t *crear_masas() {
 
@@ -34,6 +18,18 @@ masas_t *crear_masas() {
         return NULL;
     }
 
+    m -> xi = malloc(10*sizeof(size_t));
+    if(m -> xi == NULL){
+        free(m);
+        return NULL;
+    }
+
+    m -> yi = malloc(10*sizeof(size_t));
+    if(m -> yi == NULL){
+        free(m -> xi);
+        free(m);
+        return NULL;
+    }
 
     // m -> es_fijo = malloc(10*sizeof(bool));
     // if(m ->es_fijo == NULL){
@@ -42,18 +38,23 @@ masas_t *crear_masas() {
     //     free(m);
     // }
 
-    m -> cant_masas = 0;
+    m -> masa_actual = 0;
     
+    // for(size_t i = 0; i < MASA_TOTAL; i++){
+    //     m->masa[i] = masa_crear(-100,-100);
+    // }
 
     return m;
 }
 
 bool asignar_posicion_masa(masas_t *m, size_t pos_x, size_t pos_y){
-    if(m -> cant_masas > 9){
+    if(m -> masa_actual > 9){
         return false;
     }
-    m->masa[m -> cant_masas] = masa_crear(pos_x, pos_y);
-    m -> cant_masas++;
+    m->masa[m -> masa_actual] = masa_crear(pos_x, pos_y);
+    m -> xi[m -> masa_actual] = pos_x;
+    m -> yi[m -> masa_actual] = pos_y;
+    m -> masa_actual++;
     return true;
 }
 
@@ -85,9 +86,9 @@ size_t obtener_numero_nodo(masas_t *m, size_t pos_x, size_t pos_y){
     }
 }
 
-bool hay_masa(masas_t *m, size_t pos_x, size_t pos_y) {
-    for(size_t i = 0; i <= m -> masa_actual; i++) {
-        if(m -> xi[i] == pos_x && m -> yi[i] == pos_y) {
+bool hay_masa(masas_t *m, size_t pos_x, size_t pos_y){
+    for(size_t i = 0; i <= m -> masa_actual; i++){
+        if(m -> xi[i] == pos_x && m -> yi[i] == pos_y){
             return true;
         }
     }
@@ -99,6 +100,22 @@ bool agregar_resorte(resorte_t *resorte){
 }
 
 
+// struct malla {
+//     lista_t *masas;
+//     lista_t *resortes;
+// };
+
+// malla_t *malla_crear() {
+//     malla_t *malla = malloc(sizeof(malla_t));
+//     malla->masas = lista_crear();
+//     malla->resortes = lista_crear();
+// }
+
+// void malla_destruir(malla_t *malla) {
+//     lista_destruir(malla->masas, masa_destruir);
+//     lista_destruir(malla->resortes, resorte_destruir);
+//     free(malla);
+// }
 
 // masa_t *agregar_masa(malla_t *malla, size_t x, size_t y) {
 //     masa_t *masa = masa_crear(x, y);
@@ -126,7 +143,17 @@ bool agregar_resorte(resorte_t *resorte){
 
 
 
+// masas_t *masas_crear() {
+//     masas_t *m = malloc(sizeof(masas_t));
+//     if(m == NULL)
+//         return NULL;
+        
+//     m->masas_totales = 0;
 
+//     for(size_t i = 0; i < 10; i++)
+//          m->masa[i] = masa_crear(-100,-100);
+//     return m;
+// }
 
 
 
