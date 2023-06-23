@@ -91,17 +91,16 @@ int main(int argc, char *argv[]){
                 
 
             // }
+
             else if(event.type == SDL_MOUSEMOTION) {
                 coordx = event.motion.x;
                 coordy = event.motion.y;
                 
             }
-
+            
             else if(event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT && event.type == SDL_MOUSEMOTION){
 
-                if(hay_masa(m, coordx, coordy)) {
-                    cambiar_posicion_masa(m -> masa, coordx, coordy);
-                }
+            
             }
 
 
