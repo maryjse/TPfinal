@@ -1,5 +1,5 @@
 #include "malla.h"
-#include<stdlib.h>
+#include <stdlib.h>
 
 typedef struct masas{
 	size_t *xi;
@@ -7,7 +7,9 @@ typedef struct masas{
 	masa_t *masa[10];
 	//bool *es_fijo;
     size_t masa_actual;
-}masas_t;
+} masas_t;
+
+//lista_t *lista_resortes = lista_crear();
 
 masas_t *crear_masas(){
 
@@ -41,8 +43,8 @@ masas_t *crear_masas(){
     }
 
     return m;
-
 }
+
 bool asignar_posicion_masa(masas_t *m, size_t pos_x, size_t pos_y){
     if(m -> masa_actual > 9){
         return false;
@@ -73,9 +75,29 @@ bool borrar_masa(masas_t *m, size_t pos_x, size_t pos_y){
 }
 
 size_t obtener_masas_totales(masas_t *m){
-    return m -> masa_actual;
+    return m -> masa_actual + 1;
 }
 
+size_t obtener_numero_nodo(masas_t *m, size_t pos_x, size_t pos_y){
+    for(size_t i = 0; i <= m -> masa_actual; i++){
+        if(m -> xi[i] == pos_x && m -> yi[i] == pos_y){
+            return i;
+        }
+    }
+}
+
+bool hay_masa(masas_t *m, size_t pos_x, size_t pos_y){
+    for(size_t i = 0; i <= m -> masa_actual; i++){
+        if(m -> xi[i] == pos_x && m -> yi[i] == pos_y){
+            return true;
+        }
+    }
+    return false;
+}
+
+bool agregar_resorte(resorte_t *resorte){
+
+}
 
 
 // struct malla {

@@ -2,7 +2,7 @@
 #define RESORTE_H
 
 #include "lista.h"
-#include<stdlib.h>
+#include <stdlib.h>
 
 //TDA que representa un resorte.
 //Contiene la longitud del resorte, y dos vectores de longitud 2 que guarda sus x e y.
@@ -13,12 +13,8 @@ typedef struct resorte {
     size_t longitud; 
     int pos_inicial[2];
     int pos_final[2];
+    float k;
 } resorte_t;
-
-
-
-
-
 
 
 //Crea un resorte
@@ -38,6 +34,5 @@ bool hay_resorte(int pos_x, int pos_y); //Comprueba si hay un resorte en esa pos
 
 //debo usar la lista que se da en clase para guardar los resortes
 //cuando el usuario clickee sobre una masa creada se inicia la creacion de un resorte
-
 
 #endif

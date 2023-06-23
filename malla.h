@@ -51,7 +51,7 @@ bool asignar_posicion_masa(masas_t *m, size_t pos_x, size_t pos_y);
 //Agrega un resorte a la malla.
 //Pre: Resorte != NULL.
 //Post: Si el agregado fue existoso devuelve true.
-//bool agregar_resorte();
+bool agregar_resorte();
 
 //Verifica si hay alguna masa o resorte en la malla.
 //Post: Si esta vacia devuelve true.
@@ -74,6 +74,10 @@ bool borrar_masa(masas_t *m, size_t pos_x, size_t pos_y);
 
 //Iterador para obtener las posiciones de todas las masas dentro de la malla
 void iterar_posiciones_masa(masas_t *m, size_t *pos_x, size_t *pos_y, size_t i);
+
+size_t obtener_numero_nodo(masas_t *m, size_t pos_x, size_t pos_y);
+
+bool hay_masa(masas_t *m, size_t pos_x, size_t pos_y);
 
 //NOTAS:
 

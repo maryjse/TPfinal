@@ -8,8 +8,8 @@ typedef struct lista lista_t;
 typedef struct lista_iter lista_iter_t;
 
 /*
- * Primitivas de lista simplemente enlazada
- */
+* Primitivas de lista simplemente enlazada
+*/
 
 // Crea una lista
 // Post: Se devuelve una nueva lista.
@@ -58,8 +58,8 @@ void lista_destruir(lista_t *lista, void (*destruir_dato)(void *));
 void lista_recorrer(lista_t *lista,bool (*visitar)(void *dato, void *extra),void *extra);
 
 /*
- * Primitivas de iteración
- */
+* Primitivas de iteración
+*/
 
 // Obtiene un iterador de la lista
 // Pre: la lista fue creada

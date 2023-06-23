@@ -25,36 +25,6 @@ void escribir_texto(SDL_Renderer *renderer, TTF_Font *font, const char *s, int x
 }
 #endif
 
-//PRUEBA:
-    // typedef struct masas{
-    //     masa_t *masa[10];
-    //     size_t masas_totales;
-    // } masas_t;
-
-    // masas_t *masas_crear() {
-    //     masas_t *m = malloc(sizeof(masas_t));
-    //     if(m == NULL)
-    //         return NULL;
-        
-    //     m->masas_totales = 0;
-
-    //     for(size_t i = 0; i < MASA_TOTAL; i++)
-    //         m->masa[i] = masa_crear(-100,-100);
-        
-    //     return m;
-    // }
-
-    // bool agregar_masa(masas_t *m, int xi, int yi) {
-    //     //m -> masa = malloc( 10 * sizeof(masa_t*));
-    //    // if(m -> masa == NULL){
-    //       //  return false;
-    //     //}
-    //     cambiar_posicion_masa(m -> masa[m -> masas_totales], xi, yi);
-        
-    //     m->masas_totales++;
-    //     return true;
-    // }
-
 int main(int argc, char *argv[]){
     SDL_Init(SDL_INIT_VIDEO);
 
@@ -81,10 +51,15 @@ int main(int argc, char *argv[]){
     int coordx = 0, coordy = 0;
     int iniciox, inicioy;
     int derechox, derechoy;
+    int finalrx, finalry;
     // masa_t *masa_i[10];
     // malla_t *malla = malla_crear();
     masas_t *m = crear_masas();
+    resorte_t *r;
     size_t masas_totales;
+
+    lista_t *lista_resortes = lista_crear();
+    
     // END código del alumno
 
     unsigned int ticks = SDL_GetTicks();
@@ -100,22 +75,15 @@ int main(int argc, char *argv[]){
                 estoy_dibujando = true;
                 iniciox = event.motion.x;
                 inicioy = event.motion.y;
+                //PRUEBA:      
+                if(masas_totales < MASA_TOTAL){
 
+                    if(!hay_masa(m, iniciox, inicioy)){  
+                        asignar_posicion_masa(m, iniciox, inicioy);         
+                    }
 
-                //PRUEBA:
-                
-                 if(masas_totales < MASA_TOTAL){
-                    asignar_posicion_masa(m, iniciox, inicioy);
-                 }
-                //     masa_i[masas_totales] = agregar_masa(malla, iniciox, inicioy);
-               
-                /*
-            else if(event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT && event.type == SDL_MOUSEMOTION){
-
-                //lista_t *resorte_i = crear_resorte();
-                lista_insertar_primero(resorte_i, masa_existente);
-            }
-                */
+                    r = resorte_crear(iniciox, inicioy);
+                }
             }
 
             // else if(event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_RIGHT){
@@ -129,12 +97,15 @@ int main(int argc, char *argv[]){
                 coordx = event.motion.x;
                 coordy = event.motion.y;
                 
-                
             }
 
             else if(event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT) {
 
-                
+                    finalrx = event.motion.x;
+                    finalry = event.motion.y;
+                   
+                if(resorte_agregar_final(r, finalrx, finalry))
+                    lista_insertar_ultimo(lista_resortes, r);
                 //Si no hay masa creo una masa:
                 //masa_t *m1 = masa_crear(coordx, coordy);
                 
@@ -143,9 +114,7 @@ int main(int argc, char *argv[]){
                 //Si ya existe una masa hago:
                 //lista_insertar_ultimo(resorte_i,masa_existente);
 
-                estoy_dibujando = false;
-
-            
+                estoy_dibujando = false; 
             }
             // END código del alumno
 
@@ -186,6 +155,11 @@ int main(int argc, char *argv[]){
             SDL_Rect r2 = {iniciox - ancho/2, inicioy - ancho/2, ancho, ancho};
             SDL_RenderDrawRect(renderer, &r2);
 
+            if(resorte_agregar_final(r, coordx, coordy)){
+                SDL_RenderDrawLine(renderer, iniciox, inicioy, coordx, coordy);
+            }
+                
+
 
         }
 
@@ -194,8 +168,8 @@ int main(int argc, char *argv[]){
         size_t posiciones[10][2];
        
 
-        for(size_t i = 0; i < masas_totales; i++){
-           iterar_posiciones_masa(m, &posiciones[i][0], &posiciones[i][1], i);
+        for(size_t i = 0; i < masas_totales; i++) {
+            iterar_posiciones_masa(m, &posiciones[i][0], &posiciones[i][1], i);
         }
 
         SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
@@ -217,8 +191,20 @@ int main(int argc, char *argv[]){
         //Dibujado de las masas
         for(size_t i = 0; i < masas_totales; i++){
             SDL_RenderDrawRect(renderer, &masas[i]);
-
         }
+        
+        lista_iter_t *li;
+        for (li = lista_iter_crear(lista_resortes); !lista_iter_al_final(li); lista_iter_avanzar(li)) {
+            resorte_t *resorte = lista_iter_ver_actual(li);
+            printf("Xinicial: %d\n", resorte->pos_inicial[0]);
+            printf("Yinicial: %d\n", resorte->pos_inicial[1]);
+            printf("Xfinal: %d\n", resorte->pos_final[0]);
+            printf("Yfinal: %d\n", resorte->pos_final[1]);
+            SDL_RenderDrawLine(renderer, resorte -> pos_inicial[0], resorte -> pos_final[1], resorte ->pos_final[0], resorte ->pos_final[1]);
+        }
+        lista_iter_destruir(li);
+
+       
         
         // for(size_t i = 0; i < masas_totales; i++){
         //     if(posiciones[i][0] == derechox && posiciones[i][1] == derechoy){
