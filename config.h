@@ -19,4 +19,8 @@
 #define K_BASE 200                  // k_resorte = K_BASE / pow(l0, POTENCIA_K)
 #define POTENCIA_K 1.5
 
+#define ANCHO 10
+#define EPSILON_MASA 20.0
+#define EPSILON_RESORTE 75.0
+
 #endif

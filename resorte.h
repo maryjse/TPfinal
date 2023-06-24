@@ -28,7 +28,7 @@ bool resorte_agregar_final(resorte_t *resorte, int x_final, int y_final); //Reci
 //Pre: el resorte fue creado
 //Post: Se termina de construir el resorte o se destruye, dependiendo de si se pasa la longitud maxima o no
 
-bool hay_resorte(int pos_x, int pos_y); //Comprueba si hay un resorte en esa posicion.
+//bool hay_resorte(int pos_x, int pos_y); //Comprueba si hay un resorte en esa posicion.
 //No se como hacer esta funcion, pero se me ocurre que si las posiciones estan entre una recta trazada entre
 //pos_inicial y pos_final de algun resorte de la lista sea true;
 

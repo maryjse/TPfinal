@@ -21,7 +21,7 @@ void obtener_posicion(const masa_t *m, size_t *pos_x, size_t *pos_y) {
     *pos_y = m -> y;
 }
 
-void cambiar_posicion_masa(masa_t *masa, size_t nueva_x, size_t nueva_y) {
+void cambiar_posicion_masa(masa_t *masa, size_t nueva_x, size_t nueva_y){
     masa->x = nueva_x;
     masa->y = nueva_y;
 }

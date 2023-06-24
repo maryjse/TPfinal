@@ -8,10 +8,6 @@
 #include "config.h"
 #include "lista.h"
 
-// typedef struct masas {
-//     masa_t *masa[10];
-//     size_t masas_totales;
-// } masas_t;
 
 //TDA que representa una malla.
 //Contiene las masas y los resortes creados.
@@ -28,7 +24,7 @@ masas_t *crear_masas();
 //void malla_destruir(malla_t *malla);
 
 //Mueve un nodo de la malla.
-//void mover_nodo(malla_t *malla);
+void mover_nodo(masa_t *m, resorte_t *r, size_t x, size_t y);
 
 //Agrega una masa a la malla.
 //Pre: Masa != NULL.
@@ -72,7 +68,11 @@ void iterar_posiciones_masa(masas_t *m, size_t *pos_x, size_t *pos_y, size_t i);
 
 size_t obtener_numero_nodo(masas_t *m, size_t pos_x, size_t pos_y);
 
-bool hay_masa(masas_t *m, size_t pos_x, size_t pos_y);
+bool hay_masa(masa_t *m, size_t pos_x, size_t pos_y);
+
+bool hay_resorte(resorte_t *resorte, size_t pos_x, size_t pos_y);
+
+static double distancia_extremo_resorte(resorte_t *resorte, size_t pos_x, size_t pos_y);
 
 //NOTAS:
 
