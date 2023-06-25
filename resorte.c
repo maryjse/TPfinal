@@ -4,13 +4,6 @@
 #include <stdlib.h>
 #include <math.h>
 
-// typedef struct{
-// 	uint32_t *na;
-// 	uint32_t *nb;
-// 	float *ki;
-// 	float *li;
-// } arista_t;
-
 resorte_t *resorte_crear(int xi, int yi){
     resorte_t *r = malloc(sizeof(resorte_t));
     if (r == NULL)
@@ -45,6 +38,3 @@ void obtener_posiciones(resorte_t *r, int *inicial, int *final) {
     final[0] = r->pos_final[0];
     final[1] = r->pos_final[1];
 }
-
-
-

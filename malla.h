@@ -12,11 +12,7 @@
 //TDA que representa una malla.
 //Contiene las masas y los resortes creados.
 
-typedef struct masas masas_t;
-
-//Crea las masas.
-//Post: En caso de no poder crear las masas devuelve NULL.
-masas_t *crear_masas();
+typedef struct malla malla_t;
 
 //Destruye la malla.
 //Pre: la masa y los resortes deben existir previamente.
@@ -26,6 +22,10 @@ masas_t *crear_masas();
 //Mueve un nodo de la malla.
 void mover_nodo(masa_t *m, resorte_t *r, size_t x, size_t y);
 
+void mover_resorte(resorte_t *r, size_t nueva_x, size_t nueva_y);
+
+
+
 //Agrega una masa a la malla.
 //Pre: Masa != NULL.
 //Post: Si el agregado fue existoso devuelve true.
@@ -34,7 +34,7 @@ void mover_nodo(masa_t *m, resorte_t *r, size_t x, size_t y);
 //Asigna las posiciones de las masas en la malla
 //Pre: La malla fue previamente creada
 //Post: Asigna las posiciones de las masas, en orden dentro de la malla 
-bool asignar_posicion_masa(masas_t *m, size_t pos_x, size_t pos_y);
+// bool asignar_posicion_masa(masas_t *m, size_t pos_x, size_t pos_y);
 
 
 //masas_t *agregar_masa(malla_t *malla, size_t x, size_t y);
@@ -56,23 +56,24 @@ bool agregar_resorte();
 
 //Devuelve por nombre la cantidad de masas totales en la malla
 //Pre: La malla que se le pasa fue creada
-size_t obtener_masas_totales(masas_t *m);
+//size_t obtener_masas_totales(masas_t *m);
 
 //Borra la masa que haya en la posicion dada, en caso de haberla
 //Pre: La malla fue creada
 //Post: Devuelve true si se destruyo una masa en esa posicion
-bool borrar_masa(masas_t *m, size_t pos_x, size_t pos_y);
+//bool borrar_masa(masas_t *m, size_t pos_x, size_t pos_y);
 
 //Iterador para obtener las posiciones de todas las masas dentro de la malla
-void iterar_posiciones_masa(masas_t *m, size_t *pos_x, size_t *pos_y, size_t i);
+//void iterar_posiciones_masa(masas_t *m, size_t *pos_x, size_t *pos_y, size_t i);
 
-size_t obtener_numero_nodo(masas_t *m, size_t pos_x, size_t pos_y);
+//size_t obtener_numero_nodo(masas_t *m, size_t pos_x, size_t pos_y);
 
 bool hay_masa(masa_t *m, size_t pos_x, size_t pos_y);
 
 bool hay_resorte(resorte_t *resorte, size_t pos_x, size_t pos_y);
 
 static double distancia_extremo_resorte(resorte_t *resorte, size_t pos_x, size_t pos_y);
+
 
 //NOTAS:
 

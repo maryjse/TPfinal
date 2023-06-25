@@ -2,6 +2,26 @@
 #include <stdlib.h>
 #include <math.h>
 
+// struct nodo {
+//     masa_t *masa;
+//     resorte_t *resorte;
+//     size_t x, y;
+// } nodo_t;
+
+// nodo_t *nodo_crear(masa_t *m, resorte_t *r) {
+//     malla_t *nodo = malloc(sizeof(nodo_t));
+//     if(malla == NULL){
+//         return NULL;
+//     }
+
+//     nodo->x = m->x;
+//     nodo->y = m->y;
+    
+//     r->pos_inicial[0] = nodo->x;
+//     r->pos_inicial[1] = nodo->y;
+//     return nodo;
+// }
+
 bool hay_masa(masa_t *masa, size_t pos_x, size_t pos_y) {
     double distancia = sqrt(pow(pos_x - masa->x, 2) + pow(pos_y - masa->y, 2));
     if(distancia <= EPSILON_MASA) {
@@ -36,17 +56,11 @@ bool hay_resorte(resorte_t *resorte, size_t pos_x, size_t pos_y) {
     return (distancia <= EPSILON_RESORTE);
 }
 
-void mover_nodo(masa_t *m, resorte_t *r, size_t x, size_t y) {
-    if(hay_resorte(r, m->x, m->y)) {
-        if(distancia_extremo_resorte(r, x, y) >= 1) {
-            r->pos_final[0] = x;
-            r->pos_final[1] = y;
-        } else if(distancia_extremo_resorte(r, x, y) <= 0) {
-            r->pos_inicial[0] = x;
-            r->pos_inicial[1] = y;
-        }
-    }
-}
+
+
+// void mover_nodo(size_t x, size_t y) {
+
+// }
 
 static double distancia_extremo_resorte(resorte_t *resorte, size_t pos_x, size_t pos_y) {
     double distancia;
@@ -74,6 +88,14 @@ static double distancia_extremo_resorte(resorte_t *resorte, size_t pos_x, size_t
 
     return alpha;
 }
+
+void mover_resorte(resorte_t *r, size_t nueva_x, size_t nueva_y){
+        r->pos_final[0] = nueva_x;
+        r->pos_final[1] = nueva_y;
+    }
+
+
+
 
 // //lista_t *lista_resortes = lista_crear();
 

@@ -72,9 +72,10 @@ int main(int argc, char *argv[]) {
                 estoy_dibujando = true;
                 iniciox = event.motion.x;
                 inicioy = event.motion.y;
-                
-                //PRUEBA:      
+                      //PRUEBA:      
                 if(masas_totales < MASA_TOTAL){
+                   
+    
                     masa_t *m = masa_crear(iniciox, inicioy);
                     lista_insertar_ultimo(lista_masas, m);
 
@@ -88,6 +89,7 @@ int main(int argc, char *argv[]) {
                     lista_iter_destruir(li_masa);
                 }
             }
+            
 
              else if(event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_RIGHT) {
                 derechox = event.motion.x;
@@ -112,35 +114,38 @@ int main(int argc, char *argv[]) {
                         }
                     }
                 lista_iter_destruir(li_r);
-            
             }
 
             else if(event.type == SDL_MOUSEMOTION) {
                 coordx = event.motion.x;
                 coordy = event.motion.y;
-                
+
             }
-            
+        
 
             else if(event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT) {
                 finalrx = event.motion.x;
                 finalry = event.motion.y;
-
+            
                 if(resorte_agregar_final(r, finalrx , finalry))
                     lista_insertar_ultimo(lista_resortes, r);
 
-                lista_iter_t *li_masa = lista_iter_crear(lista_masas);
-                lista_iter_t *li_r = lista_iter_crear(lista_masas);
-                for(li_masa, li_r; !lista_iter_al_final(li_masa) || !lista_iter_al_final(li_r); lista_iter_avanzar(li_masa), lista_iter_avanzar(li_r)) {
-                    masa_t *m = lista_iter_ver_actual(li_masa);
-                    resorte_t *r = lista_iter_ver_actual(li_r);
+                lista_iter_t *li = lista_iter_crear(lista_masas);
+                for(li; !lista_iter_al_final(li); lista_iter_avanzar(li)) {
+                        masa_t *m = lista_iter_ver_actual(li);
                         if(hay_masa(m, iniciox, inicioy)) {
                             cambiar_posicion_masa(m, finalrx, finalry);
-                            mover_nodo(m, r, finalrx, finalry);
+                            // lista_iter_t *li_r = lista_iter_crear(lista_resortes);
+                            // for(li_r; !lista_iter_al_final(li_r); lista_iter_avanzar(li_r)) {
+                            //     resorte_t *r = lista_iter_ver_actual(li_r);
+                            //     if(hay_resorte(r, iniciox, inicioy)) {
+                            //         mover_resorte(r,finalrx,finalry);
+                            //     }
+                            // }
+                            // lista_iter_destruir(li_r);
                         }
                 }
-                lista_iter_destruir(li_masa);
-                lista_iter_destruir(li_r);
+                lista_iter_destruir(li);
                 estoy_dibujando = false; 
             }
             // END código del alumno
@@ -182,6 +187,8 @@ int main(int argc, char *argv[]) {
 
             SDL_Rect r2 = {iniciox - ancho/2, inicioy - ancho/2, ancho, ancho};
             SDL_RenderDrawRect(renderer, &r2);
+
+            
         }
 
         //PRUEBA:
@@ -193,6 +200,9 @@ int main(int argc, char *argv[]) {
         for(i = 0, ld = lista_iter_crear(lista_masas); !lista_iter_al_final(ld); lista_iter_avanzar(ld), i++) {
             masa_t *m = lista_iter_ver_actual(ld);
             obtener_posicion(m, &posiciones[i][0], &posiciones[i][1]);
+            if(i>0){
+                
+            }
         }
         lista_iter_destruir(ld);
 
